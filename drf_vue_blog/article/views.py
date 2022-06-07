@@ -63,3 +63,11 @@ class ArticleDetail(APIView):
         article.delete()
         # 删除成功后返回204
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def post(self, request, pk):
+        serializer = ArticleDetailSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+
