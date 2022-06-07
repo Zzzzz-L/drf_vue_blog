@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from . import models
 
 
 class ArticleListSerializer(serializers.Serializer):
@@ -7,3 +8,17 @@ class ArticleListSerializer(serializers.Serializer):
     body = serializers.CharField(allow_blank=True)
     created = serializers.DateTimeField()
     updated = serializers.DateTimeField()
+
+
+class ArticleModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Article
+        fields = [
+            'id', 'title', 'body'
+        ]
+
+
+class ArticleDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Article
+        fields = '__all__'
